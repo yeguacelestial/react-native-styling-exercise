@@ -1,6 +1,7 @@
 // Main libraries
 import React from 'react'
 import { View, Text, SafeAreaView, StyleSheet, FlatList } from 'react-native'
+import { NavigationContainer } from '@react-navigation/native'
 
 // Components
 import ColorBox from './components/ColorBox'
@@ -30,17 +31,19 @@ const COLORS = [
 // App content
 const App = () => {
   return (
-    <SafeAreaView style={styles.safeArea}>
-      <View style={styles.container}>
-        {/* Create FlatList of colors */}
-        <FlatList
-          data={COLORS}
-          keyExtractor={item => item.colorName}
-          renderItem={({ item }) => <ColorBox colorName={item.colorName} colorHex={item.hexCode} />}
-          ListHeaderComponent={<Text style={styles.headingText}>Solarized</Text>}
-        />
-      </View>
-    </SafeAreaView >
+    <NavigationContainer>
+      <SafeAreaView style={styles.safeArea}>
+        <View style={styles.container}>
+          {/* Create FlatList of colors */}
+          <FlatList
+            data={COLORS}
+            keyExtractor={item => item.colorName}
+            renderItem={({ item }) => <ColorBox colorName={item.colorName} colorHex={item.hexCode} />}
+            ListHeaderComponent={<Text style={styles.headingText}>Solarized</Text>}
+          />
+        </View>
+      </SafeAreaView >
+    </NavigationContainer>
   )
 }
 
