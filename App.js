@@ -18,11 +18,15 @@ const App = () => {
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen name="Home" component={Home} />
-        <Stack.Screen name="ColorPalette" component={ColorPalette} />
+        <Stack.Screen
+          name="ColorPalette"
+          component={ColorPalette}
+
+          // Pass paletteName property as Screen title
+          options={({ route }) => ({ title: route.params.paletteName })} />
       </Stack.Navigator>
     </NavigationContainer>
   )
 }
-
 
 export default App

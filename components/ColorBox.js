@@ -27,7 +27,16 @@ const styles = StyleSheet.create({
         // Font attributes
         textAlign: 'center',
         fontSize: 15,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+
+        // Shadowing elements on iOS
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.3,
+        shadowRadius: 1,
+
+        // Shadowing elements on Android
+        elevation: 10
     }
 })
 
