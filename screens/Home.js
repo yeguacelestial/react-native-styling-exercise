@@ -3,11 +3,15 @@ import { View, FlatList, StyleSheet } from 'react-native'
 
 // Custom components
 import PalettePreview from '../components/PalettePreview'
+import { useSafeArea } from 'react-native-safe-area-context'
 
 
 const Home = ({ navigation }) => {
     // Creating useState object for fetching colors and displaying them
     const [colorPalettes, setColorPalettes] = useState([])
+
+    // Refresh states
+    const [isRefreshing, setIsRefreshing] = useState(false)
 
     // Fetching colors with Fetch API
     const handleFetchColors = useCallback(async () => {
@@ -28,6 +32,14 @@ const Home = ({ navigation }) => {
         handleFetchColors()
     }, [])
 
+    const handleRefresh = useCallback(async () => {
+        setIsRefreshing(true)
+        await handleFetchColors()
+        setTimeout(() => {
+            setIsRefreshing(false)
+        }, 1000)
+    })
+
     return (
         <View style={styles.viewStyles}>
             <FlatList
@@ -43,6 +55,8 @@ const Home = ({ navigation }) => {
                         />
                     )
                 }}
+                refreshing={isRefreshing}
+                onRefresh={handleRefresh}
             />
         </View>
     )
