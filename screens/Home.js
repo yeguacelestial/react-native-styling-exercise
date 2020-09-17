@@ -1,9 +1,8 @@
 import React, { useState, useCallback, useEffect } from 'react'
-import { View, FlatList, StyleSheet } from 'react-native'
+import { View, FlatList, StyleSheet, Text, TouchableOpacity } from 'react-native'
 
 // Custom components
 import PalettePreview from '../components/PalettePreview'
-import { useSafeArea } from 'react-native-safe-area-context'
 
 
 const Home = ({ navigation }) => {
@@ -57,6 +56,14 @@ const Home = ({ navigation }) => {
                 }}
                 refreshing={isRefreshing}
                 onRefresh={handleRefresh}
+                ListHeaderComponent={
+                    <TouchableOpacity
+                        onPress={() => {
+                            navigation.navigate('ColorPaletteModal')
+                        }}
+                    >
+                        <Text>Launch modal</Text>
+                    </TouchableOpacity>}
             />
         </View>
     )
