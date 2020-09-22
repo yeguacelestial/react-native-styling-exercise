@@ -5,7 +5,10 @@ import { View, FlatList, StyleSheet, Text, TouchableOpacity } from 'react-native
 import PalettePreview from '../components/PalettePreview'
 
 
-const Home = ({ navigation }) => {
+const Home = ({ navigation, route }) => {
+    // Fetching from route params
+    const newColorPalette = route.params ? route.params.newColorPalette : undefined
+
     // Creating useState object for fetching colors and displaying them
     const [colorPalettes, setColorPalettes] = useState([])
 
@@ -39,6 +42,16 @@ const Home = ({ navigation }) => {
         }, 1000)
     })
 
+    // Fetching new color palettes
+    useEffect(() => {
+        // If newColorPalette exists (not undefined)
+        if (newColorPalette) {
+
+            // Fetch current palettes, and add new color palette at the top of the array
+            setColorPalettes(palettes => [newColorPalette, ...palettes])
+        }
+    }, [newColorPalette])
+
     return (
         <View style={styles.viewStyles}>
             <FlatList
@@ -62,7 +75,7 @@ const Home = ({ navigation }) => {
                             navigation.navigate('ColorPaletteModal')
                         }}
                     >
-                        <Text>Launch modal</Text>
+                        <Text style={styles.buttonText}>Add color scheme</Text>
                     </TouchableOpacity>}
             />
         </View>
@@ -72,6 +85,13 @@ const Home = ({ navigation }) => {
 const styles = StyleSheet.create({
     viewStyles: {
         padding: 10
+    },
+
+    buttonText: {
+        fontSize: 18,
+        fontWeight: 'bold',
+        color: 'teal',
+        marginBottom: 10
     }
 })
 
